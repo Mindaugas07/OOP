@@ -107,34 +107,57 @@ from typing import List
 
 def string_with_numbers_and_letters_only():
     list_of_numbers_and_letters = []
+    user_input = ''
     list_of_special_chars = []
-    user_input = input("Please enter a sequnce with letters and numbers, and sequence length should not be less than 25 characters ")
-    for char in user_input:
-        if char.isalnum():
-            list_of_numbers_and_letters.append(char.lower())
-        else:
-            list_of_special_chars.append(char) 
-    # list_of_special_chars
+    while len(user_input) < 24:
+        user_input = input("Enter a sequnce with letters and numbers, and sequence length should not be less than 25 characters: ")
+        for char in user_input:
+            if char.isalnum():
+                list_of_numbers_and_letters.append(char.lower())
+            else:
+                list_of_special_chars.append(char)
     return list_of_numbers_and_letters   
 
 def user_option(some_list):
     user_option = '1'
-    if_checked = ''
-    if_checked2 = ''
-    while user_option in ['1', '2', '3', '4', '5', '6', '7']:
-        user_option = input(f"""Please enter the number of action you want to take:
-                            1) Get list of letters ordered {if_checked}
-                            2) Get list of letters ordered reversed {if_checked2}
-                            3) Get list of unique letters 
-                            """)
+    dict_of_options = {'1' : '', '2' : '', '3' : '', '4' : '', '5' : '', '6' : '', '7' : '', 'n' : ''}
+    while user_option in dict_of_options.keys():
+        user_option = input(f"""
+Enter a number from 1 to 7 for which action you want to take or any other key to exit the program:
+                            
+1) Get list of letters ordered {dict_of_options['1']}
+2) Get list of letters ordered reversed {dict_of_options['2']}
+3) Get list of unique letters {dict_of_options['3']}
+4) Get list of numbers ordered {dict_of_options['4']}
+5) Get list of numbers ordered reversed {dict_of_options['5']}
+6) Get list of unique numbers {dict_of_options['6']}
+7) Get letter and number amounts {dict_of_options['7']}
+n) Get special symbols {dict_of_options['n']}
+""")
         if user_option == '1':
-            if_checked = '[Checked]'
+            dict_of_options['1'] = '[Checked]' 
             print(ordered_letter_list(some_list))
         elif user_option == '2':
-            if_checked2 = '[Checked]'
+            dict_of_options['2'] = '[Checked]'
             print(reversed_letter_list(some_list))
-
-
+        elif user_option == '3':
+            dict_of_options['3'] = '[Checked]'
+            print(unique_letter_list(some_list))
+        elif user_option == '4':
+            dict_of_options['4'] = '[Checked]'
+            print(ordered_number_list(some_list))
+        elif user_option == '5':
+            dict_of_options['5'] = '[Checked]'
+            print(reversed_number_list(some_list))
+        elif user_option == '6':
+            dict_of_options['6'] = '[Checked]'
+            print(unique_number_list(some_list))
+        elif user_option == '7':
+            dict_of_options['7'] = '[Checked]'
+            print(amounts_of_letters_and_numbers(some_list))
+        else:
+            print("You exited the program!")
+    
 
 def ordered_letter_list(list_of_letters_numbers: str) -> List[str]:
     letter_list = [char for char in list_of_letters_numbers if char.isalpha()]
