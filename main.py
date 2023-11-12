@@ -102,8 +102,10 @@
 # After any option is being used, terminal should ask if we want to use another option or to exit the program.
 # If we choose to use another option, the option we already choose should be marked as `checked`:
 # 1) Get list ordered[checked]
+from typing import List, Tuple
+import logging
 
-from typing import List
+logging.basicConfig(level=logging.DEBUG, filename='data.log', filemode='a', format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%d/%m/%Y %H:%M:%S')
 
 def string_with_numbers_and_letters_only():
     list_of_numbers_and_letters = []
@@ -136,56 +138,67 @@ n) Get special symbols {dict_of_options['n']}
 """)
         if user_option == '1':
             dict_of_options['1'] = '[Checked]' 
+            logging.info(f"Option number {user_option} was picked ")
             print(ordered_letter_list(some_list))
         elif user_option == '2':
             dict_of_options['2'] = '[Checked]'
+            logging.info(f"Option number {user_option} was picked ")
             print(reversed_letter_list(some_list))
         elif user_option == '3':
             dict_of_options['3'] = '[Checked]'
+            logging.info(f"Option number {user_option} was picked ")
             print(unique_letter_list(some_list))
         elif user_option == '4':
             dict_of_options['4'] = '[Checked]'
+            logging.info(f"Option number {user_option} was picked ")
             print(ordered_number_list(some_list))
         elif user_option == '5':
             dict_of_options['5'] = '[Checked]'
+            logging.info(f"Option number {user_option} was picked ")
             print(reversed_number_list(some_list))
         elif user_option == '6':
             dict_of_options['6'] = '[Checked]'
+            logging.info(f"Option number {user_option} was picked ")
             print(unique_number_list(some_list))
         elif user_option == '7':
             dict_of_options['7'] = '[Checked]'
+            logging.info(f"Option number {user_option} was picked ")
             print(amounts_of_letters_and_numbers(some_list))
+        # elif user_option == 'n':
+        #     dict_of_options['n'] = '[Checked]'
+        #     logging.info(f"Option number {user_option} was picked ")
+        #     print(amounts_of_letters_and_numbers(some_list))
         else:
             print("You exited the program!")
     
 
-def ordered_letter_list(list_of_letters_numbers: str) -> List[str]:
+def ordered_letter_list(list_of_letters_numbers: List[str]) -> List[str]:
     letter_list = [char for char in list_of_letters_numbers if char.isalpha()]
     return sorted(letter_list)
 
-def reversed_letter_list(list_of_letters_numbers: str) -> List[str]:
+def reversed_letter_list(list_of_letters_numbers: List[str]) -> List[str]:
     letter_list = [char for char in list_of_letters_numbers if char.isalpha()]
     return sorted(letter_list, reverse=True)
 
-def unique_letter_list(list_of_letters_numbers: str) -> List[str]:
+def unique_letter_list(list_of_letters_numbers: List[str]) -> List[str]:
     letter_list = [char for char in list_of_letters_numbers if char.isalpha()]
     letter_set = set(letter_list)
     return list(letter_set)
 
-def ordered_number_list(list_of_letters_numbers: str) -> List[str]:
+def ordered_number_list(list_of_letters_numbers: List[str]) -> List[str]:
     number_list = [char for char in list_of_letters_numbers if char.isdigit()]
     return sorted(number_list)
 
-def reversed_number_list(list_of_letters_numbers: str) -> List[str]:
+def reversed_number_list(list_of_letters_numbers: List[str]) -> List[str]:
     number_list = [char for char in list_of_letters_numbers if char.isdigit()]
     return sorted(number_list, reverse=True)
 
-def unique_number_list(list_of_letters_numbers: str) -> List[str]:
+def unique_number_list(list_of_letters_numbers: List[str]) -> List[str]:
     number_list = [char for char in list_of_letters_numbers if char.isdigit()]
     number_set = set(number_list)
     return list(number_set)
 
-def amounts_of_letters_and_numbers(list_of_letters_numbers: str):
+def amounts_of_letters_and_numbers(list_of_letters_numbers: List[str]) -> Tuple[int]:
     letter_list = [char for char in list_of_letters_numbers if char.isalpha()]
     number_list = [char for char in list_of_letters_numbers if char.isdigit()]
     return len(letter_list), len(number_list) 
